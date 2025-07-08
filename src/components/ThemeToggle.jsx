@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const themes = [
   { name: "synthwave", colors: ["#8a4fff", "#ff3ebf", "#00f5d4", "#000000"] },
@@ -17,35 +17,44 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 bg-base-100/80 backdrop-blur-lg p-5 rounded-xl shadow-xl border border-base-content/10 space-y-4 w-28">
-      <h2 className="text-center text-sm font-semibold uppercase text-base-content/80">
+    <div
+      className={`
+        fixed z-50 bg-base-100/80 backdrop-blur-lg p-4 rounded-xl shadow-xl border border-base-content/10
+        w-72 sm:w-28
+        bottom-4 left-1/2 -translate-x-1/2 sm:left-auto sm:bottom-auto sm:right-4 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0
+      `}
+    >
+      <h2 className="text-center text-sm font-semibold uppercase text-base-content/80 mb-3">
         Themes
       </h2>
 
-      {themes.map(({ name, colors }) => (
-        <div
-          key={name}
-          className={`cursor-pointer flex flex-col items-center gap-1 p-2 rounded-lg transition-all ${
-            activeTheme === name
-              ? "bg-base-300 border border-primary"
-              : "hover:bg-base-200"
-          }`}
-          onClick={() => handleThemeChange(name)}
-        >
-          <span className="text-[11px] capitalize text-base-content/60 font-medium">
-            {name}
-          </span>
-          <div className="flex gap-[2px] w-16 h-5">
-            {colors.map((c, i) => (
-              <span
-                key={i}
-                className="flex-1 rounded"
-                style={{ backgroundColor: c }}
-              />
-            ))}
+      <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible">
+        {themes.map(({ name, colors }) => (
+          <div
+            key={name}
+            className={`cursor-pointer flex flex-col items-center gap-1 p-2 rounded-lg transition-all min-w-[72px] sm:min-w-0
+              ${
+                activeTheme === name
+                  ? "bg-base-300 border border-primary"
+                  : "hover:bg-base-200"
+              }`}
+            onClick={() => handleThemeChange(name)}
+          >
+            <span className="text-[11px] capitalize text-base-content/60 font-medium">
+              {name}
+            </span>
+            <div className="flex gap-[2px] w-16 h-5">
+              {colors.map((c, i) => (
+                <span
+                  key={i}
+                  className="flex-1 rounded"
+                  style={{ backgroundColor: c }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
