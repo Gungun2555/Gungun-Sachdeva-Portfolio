@@ -1,10 +1,13 @@
 // src/pages/Home.jsx
 
-import React from "react";
+import React, { useState } from "react";
 import avatar from "../assets/avt.mp4";
+import fallbackImage from "../assets/image.png"; // 🔁 Replace with your actual image path
 import resumePDF from "../assets/resume.pdf";
 
 export default function Home() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
   return (
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-center p-4 md:p-10 gap-4 md:gap-2 bg-base-100 text-base-content">
       <div className="text-center md:text-left max-w-xl">
@@ -30,14 +33,25 @@ export default function Home() {
         </a>
       </div>
 
-      <div className="rounded-full overflow-hidden border-2 md:border-4 border-primary shadow-xl w-40 h-40 md:w-60 md:h-60">
+      <div className="relative rounded-full overflow-hidden border-2 md:border-4 border-primary shadow-xl w-40 h-40 md:w-60 md:h-60">
+        {!videoLoaded && (
+          <img
+            src={fallbackImage}
+            alt="Profile"
+            className="w-full h-full object-cover"
+          />
+        )}
+
         <video
           src={avatar}
           autoPlay
           loop
           muted
           playsInline
-          className="object-cover w-full h-full"
+          onLoadedData={() => setVideoLoaded(true)}
+          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+            videoLoaded ? "opacity-100" : "opacity-0"
+          }`}
         />
       </div>
     </section>

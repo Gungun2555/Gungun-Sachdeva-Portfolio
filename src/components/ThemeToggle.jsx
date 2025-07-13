@@ -32,7 +32,7 @@ const ThemeToggle = () => {
       <div
         className={`${
           open ? "flex" : "hidden"
-        } sm:flex flex-col bg-base-100/80 backdrop-blur-lg p-4 rounded-xl shadow-xl border border-base-content/10 w-64`}
+        } sm:flex flex-col bg-base-100/80 backdrop-blur-lg p-4 rounded-xl shadow-xl border border-base-content/10 w-30 max-h-[90vh] overflow-y-auto`}
       >
         <h2 className="text-center text-sm font-semibold uppercase text-base-content/80 mb-3">
           Themes
